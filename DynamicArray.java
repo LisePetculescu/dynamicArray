@@ -14,19 +14,43 @@ public class DynamicArray {
     printArray();
   }
 
-  // public int get(index) {}
-
   public int size() {
     return size;
   }
 
-  // public void remove() {}
+  public void remove() {
+    size--;
+    printArray();
+  }
 
-  // public void remove(index) {}
+  public void remove(int index) {
+    for (int i = index; i < size - 1; i++) {
+      paintersArray[i] = paintersArray[i + 1];
+    }
+    size--;
+    printArray();
+  }
 
-  // public void set(index, object) {}
+  public Painter get(int index) {
+    if (index >= 0 && index < size) {
+      Painter retrievedPainter = paintersArray[index];
+      System.out.println("Retrieved Painter: " + retrievedPainter);
+      return retrievedPainter;
+    } else {
+      System.out.println("No object on that index. Returning null.");
+      return null;
+    }
+  }
 
-  // public void clear() {}
+  public void set(int index, Painter painter) {
+    paintersArray[index] = painter;
+    printArray();
+  }
+
+  public void clear() {
+    size = 0;
+    printArray();
+  }
 
   public void printArray() {
     System.out.println("PainterArray:");
@@ -41,7 +65,7 @@ public class DynamicArray {
   }
 
   public static void main(String[] args) {
-    DynamicArray painterDynamicArray = new DynamicArray(5);
+    DynamicArray painterDynamicArray = new DynamicArray(7);
 
     Painter myPainter = new Painter(
       "Leonardo da Vinci",
@@ -63,12 +87,27 @@ public class DynamicArray {
       false,
       "Sun Prairie, Wisconsin, U.S."
     );
+    Painter painter6 = new Painter("teest", 99, true, "gg, dk");
 
     painterDynamicArray.add(myPainter);
     painterDynamicArray.add(painter2);
     painterDynamicArray.add(painter3);
     painterDynamicArray.add(painter4);
     painterDynamicArray.add(painter5);
+    painterDynamicArray.add(painter6);
+
+    // painterDynamicArray.remove();
+    // painterDynamicArray.clear();
+    painterDynamicArray.remove(3);
+    painterDynamicArray.get(1);
     // myPainter.printPainterInfo();
+
+    Painter updatedPainter = new Painter(
+      "Updated Artist",
+      30,
+      true,
+      "Updated Location"
+    );
+    painterDynamicArray.set(4, updatedPainter);
   }
 }

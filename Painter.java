@@ -49,28 +49,10 @@ public class Painter {
 
   // helper methods
   public void printPainterInfo() {
-    // System.out.println("Painter Information:");
-    // System.out.println("Name: " + getName());
-    // System.out.println("Age: " + getAge());
-    // System.out.println("Is this painter still alive? " + isAlive());
-    // System.out.println("This painter is from: " + GetFrom());
     System.out.println(toString());
   }
 
   // toString method
-  //   public String toString() {
-  //     return (
-  //       "Painter: name: " +
-  //       name +
-  //       ", age: " +
-  //       age +
-  //       ", isAlive: " +
-  //       isAlive +
-  //       ", from: " +
-  //       from +
-  //       ". "
-  //     );
-  //   }
   public String toString() {
     return (
       "Painter:\n" +
