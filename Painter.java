@@ -3,14 +3,14 @@ public class Painter {
   private String name;
   private int age;
   private boolean isAlive;
-  private String fromCountry;
+  private String from;
 
   // constructor
-  public Painter(String name, int age, boolean isAlive, String fromCountry) {
+  public Painter(String name, int age, boolean isAlive, String from) {
     this.name = name;
     this.age = age;
     this.isAlive = isAlive;
-    this.fromCountry = fromCountry;
+    this.from = from;
   }
 
   // getters
@@ -26,8 +26,8 @@ public class Painter {
     return isAlive;
   }
 
-  public String GetFromCountry() {
-    return fromCountry;
+  public String GetFrom() {
+    return from;
   }
 
   // setters
@@ -43,7 +43,28 @@ public class Painter {
     this.isAlive = isAlive;
   }
 
-  public void setFromCountry(String fromCountry) {
-    this.fromCountry = fromCountry;
+  public void setFrom(String from) {
+    this.from = from;
+  }
+
+  // helper methods
+  public void printPainterInfo() {
+    System.out.println("Painter Information:");
+    System.out.println("Name: " + getName());
+    System.out.println("Age: " + getAge());
+    System.out.println("Is this painter still alive? " + isAlive());
+    System.out.println("This painter is from: " + GetFrom());
+  }
+
+  // main
+  public static void main(String[] args) {
+    Painter myPainter = new Painter(
+      "Leonardo da Vinci",
+      67,
+      false,
+      "Vinci, Italy"
+    );
+
+    myPainter.printPainterInfo();
   }
 }
