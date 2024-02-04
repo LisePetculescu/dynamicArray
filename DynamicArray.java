@@ -2,13 +2,19 @@ public class DynamicArray {
 
   private Painter[] paintersArray;
   private int size;
+  private int growSize;
 
   public DynamicArray(int arraySize) {
     paintersArray = new Painter[arraySize];
     size = 0;
+    growSize = 20;
   }
 
   public void add(Painter painter) {
+    if (size == paintersArray.length) {
+      grow();
+    }
+
     paintersArray[size] = painter;
     size++;
     printArray();
@@ -52,6 +58,21 @@ public class DynamicArray {
     printArray();
   }
 
+  private void grow() {
+    int moreSpace = paintersArray.length + growSize;
+    Painter[] newPaintersArray = new Painter[moreSpace];
+
+    for (int i = 0; i < size; i++) {
+      newPaintersArray[i] = paintersArray[i];
+    }
+
+    paintersArray = newPaintersArray;
+
+    System.out.println("The paintersArray has grown");
+    System.out.println(" ");
+    // printArray();
+  }
+
   public void printArray() {
     System.out.println("PainterArray:");
     for (int i = 0; i < size; i++) {
@@ -62,10 +83,12 @@ public class DynamicArray {
       }
     }
     System.out.println();
+    System.out.println(paintersArray.length);
+    System.out.println();
   }
 
   public static void main(String[] args) {
-    DynamicArray painterDynamicArray = new DynamicArray(7);
+    DynamicArray painterDynamicArray = new DynamicArray(10);
 
     Painter myPainter = new Painter(
       "Leonardo da Vinci",
@@ -88,6 +111,18 @@ public class DynamicArray {
       "Sun Prairie, Wisconsin, U.S."
     );
     Painter painter6 = new Painter("teest", 99, true, "gg, dk");
+    Painter painter7 = new Painter("New Artist 1", 40, true, "New Location 1");
+    Painter painter8 = new Painter("New Artist 2", 55, true, "New Location 2");
+    Painter painter9 = new Painter("New Artist 3", 28, false, "New Location 3");
+
+    Painter painter10 = new Painter("New Artist 4", 33, true, "New Location 4");
+    Painter painter11 = new Painter(
+      "New Artist 5",
+      50,
+      false,
+      "New Location 5"
+    );
+    Painter painter12 = new Painter("New Artist 6", 42, true, "New Location 6");
 
     painterDynamicArray.add(myPainter);
     painterDynamicArray.add(painter2);
@@ -96,10 +131,23 @@ public class DynamicArray {
     painterDynamicArray.add(painter5);
     painterDynamicArray.add(painter6);
 
+    painterDynamicArray.add(painter7);
+    painterDynamicArray.add(painter8);
+    painterDynamicArray.add(painter9);
+
+    painterDynamicArray.add(painter10);
+    painterDynamicArray.add(painter11);
+    painterDynamicArray.add(painter12);
+
     // painterDynamicArray.remove();
     // painterDynamicArray.clear();
-    painterDynamicArray.remove(3);
-    painterDynamicArray.get(1);
+
+    painterDynamicArray.remove(9);
+    painterDynamicArray.remove(10);
+    painterDynamicArray.remove(11);
+    painterDynamicArray.remove(12);
+
+    // painterDynamicArray.get(1);
     // myPainter.printPainterInfo();
 
     Painter updatedPainter = new Painter(
