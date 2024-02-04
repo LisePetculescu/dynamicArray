@@ -3,9 +3,10 @@ public class DynamicArray {
   private Painter[] paintersArray;
   private int size;
   private int growSize;
+  private static int INITIAL_SIZE = 10;
 
-  public DynamicArray(int arraySize) {
-    paintersArray = new Painter[arraySize];
+  public DynamicArray() {
+    paintersArray = new Painter[INITIAL_SIZE];
     size = 0;
     growSize = 20;
   }
@@ -34,6 +35,7 @@ public class DynamicArray {
       paintersArray[i] = paintersArray[i + 1];
     }
     size--;
+    shrink();
     printArray();
   }
 
@@ -55,6 +57,7 @@ public class DynamicArray {
 
   public void clear() {
     size = 0;
+    shrink();
     printArray();
   }
 
@@ -73,8 +76,33 @@ public class DynamicArray {
     // printArray();
   }
 
+  public boolean canShrink() {
+    return (
+      paintersArray.length > size &&
+      paintersArray.length - size > growSize &&
+      paintersArray.length - growSize >= INITIAL_SIZE
+    );
+  }
+
+  private void shrink() {
+    if (canShrink()) {
+      int lessSpace = paintersArray.length - growSize;
+      Painter[] newPaintersArray = new Painter[lessSpace];
+
+      for (int i = 0; i < size; i++) {
+        newPaintersArray[i] = paintersArray[i];
+      }
+
+      paintersArray = newPaintersArray;
+
+      System.out.println("The paintersArray has gotten smaller");
+      System.out.println(" ");
+    }
+    // printArray();
+  }
+
   public void printArray() {
-    System.out.println("PainterArray:");
+    System.out.println("PaintersArray:");
     for (int i = 0; i < size; i++) {
       if (paintersArray[i] != null) {
         System.out.println(i + ": " + paintersArray[i].toString());
@@ -83,12 +111,12 @@ public class DynamicArray {
       }
     }
     System.out.println();
-    System.out.println(paintersArray.length);
+    System.out.println("Array length: " + paintersArray.length);
     System.out.println();
   }
 
   public static void main(String[] args) {
-    DynamicArray painterDynamicArray = new DynamicArray(10);
+    DynamicArray painterDynamicArray = new DynamicArray();
 
     Painter myPainter = new Painter(
       "Leonardo da Vinci",
@@ -157,5 +185,10 @@ public class DynamicArray {
       "Updated Location"
     );
     painterDynamicArray.set(4, updatedPainter);
+
+    // painterDynamicArray.clear();
+
+    boolean canShrinkResult = painterDynamicArray.canShrink();
+    System.out.println("Can Shrink: " + canShrinkResult);
   }
 }
